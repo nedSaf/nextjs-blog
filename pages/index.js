@@ -19,16 +19,14 @@ export default function Home({ allPostsData }) {
     <Layout home>
       <section className={utilStyles.headingMd}>
         <p>
-          I’m a software engineer, recently signed a contract with a German
-          company, (would show a copy upon request) I'm from Israel, I have a
-          Blue Card Visa for 4 years, I liked your apartment and would like to
-          see it. I'm a very clean and tidy person, very respectful and
-          punctual. Please let me know if you don't see my SCHUFA certificate, I
-          can email it.
+          I’m a software engineer, recently moved to Germany to work with{" "}
+          <a href="https://coliquio.de">Coliquio</a>.
+          <br />
+          Learning next.js through the official tutorial.
         </p>
         <p>
-          (This is a sample website - you’ll be building a site like this on{" "}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+          (This is a sample website - you can build a site like this on{" "}
+          <a href="https://nextjs.org/learn">Next.js tutorial</a>.)
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
