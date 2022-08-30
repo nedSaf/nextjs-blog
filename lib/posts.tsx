@@ -1,7 +1,10 @@
 import fs from "fs";
 import path from "path";
+// @ts-ignore
 import matter from "gray-matter";
+// @ts-ignore
 import { remark } from "remark";
+// @ts-ignore
 import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
