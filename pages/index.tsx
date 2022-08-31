@@ -9,6 +9,9 @@ import Link from "next/link";
 import { GetStaticProps } from "next";
 import DateElement from "../components/date";
 
+/**
+ * Get the posts data for listing.
+ */
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = await getSortedPostsData();
   return {
@@ -18,6 +21,14 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+/**
+ *  Render the homepage.
+ *
+ * @param allPostsData : allPostsData
+ *   The posts title, date, and ID for listing.
+ *
+ * @constructor
+ */
 export default function Home({
   allPostsData,
 }: {
@@ -54,7 +65,7 @@ export default function Home({
               </Link>
               <br />
               <small className={utilStyles.lightText}>
-                <DateElement dateString={date} />
+                <DateElement timestamp={date} />
               </small>
             </li>
           ))}

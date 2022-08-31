@@ -7,23 +7,40 @@ import utilStyles from "../../styles/utils.module.css";
 // @ts-ignore
 import { GetStaticProps, GetStaticPaths } from "next";
 
+/**
+ *  Get the IDs of all the posts for mapping paths.
+ */
 export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = await getAllPostIds();
-    return {
-        paths,
-        fallback: false,
-    };
+  const paths = await getAllPostIds();
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
+/**
+ * Get the current post's data.
+ *
+ * @param params : object
+ *   The params.
+ */
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const postData = await getPostData(params.id as string);
-    return {
-        props: {
-            postData,
-        },
-    };
+  const postData = await getPostData(params.id as string);
+  return {
+    props: {
+      postData,
+    },
+  };
 };
 
+/**
+ * Render the post page.
+ *
+ * @param postData : Post
+ *   The post.
+ *
+ * @constructor
+ */
 export default function Post({
   postData,
 }: {
@@ -41,7 +58,7 @@ export default function Post({
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>
-          <DateElement dateString={postData.date} />
+          <DateElement timestamp={postData.date} />
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
