@@ -1,21 +1,25 @@
+/**
+ *  Get the all the posts sorted by date.
+ */
 export async function getSortedPostsData() {
-  // Get file names under /posts
+  // Get posts from the API.
   const res = await fetchPostsFromApi();
   const allPostsData = res.props.posts.map((post) => {
     const id = post.id;
 
     const postData = {
-      'title': post.name,
-      'date': post.created,
+      title: post.name,
+      date: post.created,
     };
 
-    // Combine the data with the id
+    // Combine the data with the id.
     return {
       id,
       ...postData,
     };
   });
-  // Sort posts by date
+
+  // Sort posts by date.
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
@@ -25,8 +29,12 @@ export async function getSortedPostsData() {
   });
 }
 
+/**
+ * Get all the IDs of the posts.
+ */
 export async function getAllPostIds() {
   const res = await fetchPostsFromApi();
+
   return res.props.posts.map((post) => {
     return {
       params: {
@@ -36,17 +44,25 @@ export async function getAllPostIds() {
   });
 }
 
+/**
+ *  Get the Post's data (i.e. title, date, etc...).
+ *
+ * @param id : string
+ *   The post's ID.
+ */
 export async function getPostData(id: string) {
   const res = await fetchPostsFromApi(id);
   const post = res.props.posts[0];
   if (!post) {
-    return {notFound: true};
+    // Return page 404 if no post data was found from the API.
+    return { notFound: true };
   }
 
   const postData = {
     title: post.name,
     date: post.created,
-    contentHtml: post.post_body ?? '',
+    // Some posts might not contain a body.
+    contentHtml: post.post_body ?? "",
   };
 
   // Combine the data with the id.
@@ -56,10 +72,18 @@ export async function getPostData(id: string) {
   };
 }
 
-async function fetchPostsFromApi(id : string = '') {
+/**
+ * Fetch the posts from the hardcoded API.
+ *
+ * @param id : string
+ *   Optional; An ID of a specific post to fetch.
+ */
+async function fetchPostsFromApi(id: string = "") {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const url = id ? 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=demo&id=' + id : 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=demo';
+  const url = id
+    ? "https://api.hubapi.com/content/api/v2/blog-posts?hapikey=demo&id=" + id
+    : "https://api.hubapi.com/content/api/v2/blog-posts?hapikey=demo";
   const res = await fetch(url);
   const jsonRes = await res.json();
   const posts = jsonRes.objects;
@@ -70,5 +94,5 @@ async function fetchPostsFromApi(id : string = '') {
     props: {
       posts,
     },
-  }
+  };
 }

@@ -10,6 +10,16 @@ import Link from "next/link";
 const name = "Nader Safadi";
 export const siteTitle = "Next.js Tutorial Website";
 
+/**
+ * The main layout of the website.
+ *
+ * @param children : React.ReactNode
+ *   The child React nodes.
+ * @param home : boolean
+ *   Whether the layout is for the homepage or not.
+ *
+ * @constructor
+ */
 export default function Layout({
   children,
   home,
@@ -33,6 +43,7 @@ export default function Layout({
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <title>{siteTitle}</title>
       </Head>
       <header className={styles.header}>
         {home ? (
