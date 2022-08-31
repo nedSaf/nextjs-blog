@@ -5,9 +5,18 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 // @ts-ignore
 import Link from "next/link";
-import Date from "../components/date";
 // @ts-ignore
 import { GetStaticProps } from "next";
+import DateElement from "../components/date";
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = await getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
 
 export default function Home({
   allPostsData,
@@ -45,7 +54,7 @@ export default function Home({
               </Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
+                <DateElement dateString={date} />
               </small>
             </li>
           ))}
@@ -54,12 +63,3 @@ export default function Home({
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};
