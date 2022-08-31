@@ -46,7 +46,7 @@ export async function getPostData(id: string) {
   const postData = {
     title: post.name,
     date: post.created,
-    contentHtml: post.post_body,
+    contentHtml: post.post_body ?? '',
   };
 
   // Combine the data with the id.
