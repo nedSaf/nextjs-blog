@@ -9,6 +9,15 @@ import Link from "next/link";
 import { GetStaticProps } from "next";
 import DateElement from "../components/date";
 
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = await getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
+
 export default function Home({
   allPostsData,
 }: {
@@ -54,12 +63,3 @@ export default function Home({
     </Layout>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = await getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};
